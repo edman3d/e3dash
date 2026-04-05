@@ -1,4 +1,4 @@
-# E3Dash - Personal Health Dashboard
+# E3Dash - Personal Dashboard
 
 **Live Site**: [https://e3dash.vercel.app](https://e3dash.vercel.app)
 
