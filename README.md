@@ -2,7 +2,7 @@
 
 **Live Site**: [https://e3dash.vercel.app](https://e3dash.vercel.app)
 
-A personal dashboard web application for tracking medication intake and blood sugar levels. All features are publicly accessible without authentication requirements.
+A personal dashboard web application.
 
 ## Tech Stack
 
