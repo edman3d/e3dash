@@ -11,6 +11,7 @@ function AppContent() {
     const savedTab = localStorage.getItem('activeTab');
     return savedTab || 'dashboard';
   });
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Save active tab to localStorage whenever it changes
   useEffect(() => {
@@ -85,25 +86,54 @@ function AppContent() {
     }
   };
 
+  const handleTabClick = (tabId: string, isProtected: boolean | undefined) => {
+    if (isProtected) {
+      setShowLogin(true);
+    } else {
+      setActiveTab(tabId);
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
           <div className="flex justify-between items-center h-14">
-            <h1 className="text-xl font-bold text-gray-900">E3Dash</h1>
-            <nav className="flex space-x-6">
+            <h1 
+              onClick={() => {
+                setActiveTab('dashboard');
+                setIsMobileMenuOpen(false);
+              }}
+              className="text-xl font-bold text-gray-900 cursor-pointer hover:text-primary-600 transition-colors"
+            >
+              E3Dash
+            </h1>
+            
+            {/* Mobile Hamburger Menu */}
+            <div className="sm:hidden">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900"
+              >
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {isMobileMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden sm:flex space-x-6">
               {tabs.map((tab) => {
                 const isProtected = tab.protected && !isAuthenticated;
                 return (
                   <button
                     key={tab.id}
-                    onClick={() => {
-                      if (isProtected) {
-                        setShowLogin(true);
-                      } else {
-                        setActiveTab(tab.id);
-                      }
-                    }}
+                    onClick={() => handleTabClick(tab.id, isProtected)}
                     className={`py-2 px-1 border-b-2 font-medium text-sm ${
                       activeTab === tab.id
                         ? 'border-primary-500 text-primary-600'
@@ -119,7 +149,10 @@ function AppContent() {
               })}
               {isAuthenticated && (
                 <button
-                  onClick={logout}
+                  onClick={() => {
+                    logout();
+                    setIsMobileMenuOpen(false);
+                  }}
                   className="text-sm text-red-600 hover:text-red-800"
                 >
                   Logout
@@ -127,6 +160,44 @@ function AppContent() {
               )}
             </nav>
           </div>
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="sm:hidden border-t border-gray-200">
+              <nav className="py-2 space-y-1">
+                {tabs.map((tab) => {
+                  const isProtected = tab.protected && !isAuthenticated;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => handleTabClick(tab.id, isProtected)}
+                      className={`block w-full text-left px-3 py-2 text-base font-medium ${
+                        activeTab === tab.id
+                          ? 'bg-primary-50 border-l-4 border-primary-500 text-primary-700'
+                          : isProtected
+                          ? 'text-gray-400 cursor-not-allowed'
+                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                      }`}
+                    >
+                      {tab.name}
+                      {isProtected && ' 🔒'}
+                    </button>
+                  );
+                })}
+                {isAuthenticated && (
+                  <button
+                    onClick={() => {
+                      logout();
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="block w-full text-left px-3 py-2 text-base font-medium text-red-600 hover:text-red-800 hover:bg-red-50"
+                  >
+                    Logout
+                  </button>
+                )}
+              </nav>
+            </div>
+          )}
         </div>
       </header>
 
