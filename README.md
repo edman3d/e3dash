@@ -27,7 +27,7 @@ e3dash/
 
 ### Prerequisites
 - Node.js 18+ 
-- MongoDB running locally or MongoDB Atlasconnection string
+- MongoDB running locally or MongoDB Atlas connection string
 
 ### Installation
 1. Clone the repository
