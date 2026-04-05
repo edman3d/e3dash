@@ -9,7 +9,8 @@ A personal dashboard web application for tracking medication intake and blood su
 - **Interactive Charts**: Visual trends and statistics for health data
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 - **Tab-based Navigation**: Organized modules for easy access
-- **No Authentication**: Public access to all features
+- **Authentication**: Login system with protected routes
+- **User Management**: Single user account with encrypted password
 
 ## Tech Stack
 
@@ -17,7 +18,8 @@ A personal dashboard web application for tracking medication intake and blood su
 - **Backend**: Node.js, Express, TypeScript
 - **Database**: MongoDB with Mongoose
 - **Charts**: Recharts for data visualization
-- **Deployment**: Vercel
+- **Authentication**: JWT tokens with bcrypt password hashing
+- **Deployment**: Vercel serverless functions
 
 ## Project Structure
 
@@ -32,20 +34,27 @@ e3dash/
 ## Getting Started
 
 ### Prerequisites
-
 - Node.js 18+ 
 - MongoDB running locally or connection string
+- Git for version control
 
 ### Installation
-
 1. Clone the repository
 2. Install all dependencies:
    ```bash
    npm run install:all
    ```
 
-3. Set up environment variables in `.env.local`:
-   - Set your MongoDB connection string
+3. Set up environment variables in `.env.development`:
+   ```env
+   # Backend
+MONGODB_URI=mongodb://localhost:27017/e3dash
+NODE_ENV=development
+JWT_SECRET=your-jwt-secret-key
+
+   # Frontend
+VITE_API_URL=http://localhost:3001
+   ```
 
 4. Start development servers:
    ```bash
@@ -58,53 +67,38 @@ The application will be available at:
 
 ## Environment Variables
 
-Copy `.env.local` and update with your values:
+Copy `.env.development` and update with your values:
 
 ```env
 # Backend
 MONGODB_URI=mongodb://localhost:27017/e3dash
 NODE_ENV=development
+JWT_SECRET=your-jwt-secret-key
 
 # Frontend
 VITE_API_URL=http://localhost:3001
 ```
 
 ## Usage
-
-The application is completely public - no login required! Simply:
-
-1. **Dashboard**: View overview and quick stats
-2. **Medication**: Add, edit, and delete medication records
-3. **Blood Sugar**: Track readings with charts and statistics
+The application is organized with:
+- **Public Dashboard**: View overview and quick stats
+- **Medication**: Add, edit, and delete medication records
+- **Blood Sugar**: Track readings with charts and statistics
+- **Authentication**: Login required for medication and blood sugar features
 
 ## Data Storage
-
-All data is stored in MongoDB with a simple user identifier system. Since there's no authentication, all records use a `'demo-user'` identifier for data organization.
+All data is stored in MongoDB with a user authentication system:
+- Users collection with encrypted passwords
 
 ## Deployment
-
-Deploy to Vercel:
+Deploy to Vercel Production Environment:
 
 ```bash
 npm run deploy
 ```
 
-Set environment variables in your Vercel dashboard:
+Set environment variables in Vercel dashboard:
 - `MONGODB_URI`: Your MongoDB connection string
 - `NODE_ENV`: Set to `production`
-
-## Security
-
-- No authentication means no user data protection
-- In production, consider adding authentication if storing sensitive health data
-- MongoDB connection should be secured with proper credentials
+- `JWT_SECRET`: Generate secure random string protection
 - Rate limiting and CORS protection are configured
-
-## Future Enhancements
-
-- User authentication system (if needed)
-- Data export functionality
-- Advanced analytics and insights
-- Multi-user support
-- Integration with health devices
-- Offline mode support
