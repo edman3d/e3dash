@@ -1,16 +1,8 @@
 # E3Dash - Personal Health Dashboard
 
+**Live Site**: [https://e3dash.vercel.app](https://e3dash.vercel.app)
+
 A personal dashboard web application for tracking medication intake and blood sugar levels. All features are publicly accessible without authentication requirements.
-
-## Features
-
-- **Medication Tracking**: Track medication intake, dosages, and schedules
-- **Blood Sugar Monitoring**: Record and visualize blood sugar levels over time
-- **Interactive Charts**: Visual trends and statistics for health data
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
-- **Tab-based Navigation**: Organized modules for easy access
-- **Authentication**: Login system with protected routes
-- **User Management**: Single user account with encrypted password
 
 ## Tech Stack
 
@@ -25,8 +17,8 @@ A personal dashboard web application for tracking medication intake and blood su
 
 ```
 e3dash/
-├── package.json          # Root package with dev/prod scripts
-├── .env.local           # Environment variables (don't commit)
+├── package.json         # Root package with dev/prod scripts
+├── .env.development     # Environment variables (don't commit)
 ├── backend/             # Node.js/Express API
 └── frontend/            # React/Vite application
 ```
@@ -35,8 +27,7 @@ e3dash/
 
 ### Prerequisites
 - Node.js 18+ 
-- MongoDB running locally or connection string
-- Git for version control
+- MongoDB running locally or MongoDB Atlasconnection string
 
 ### Installation
 1. Clone the repository
@@ -47,13 +38,10 @@ e3dash/
 
 3. Set up environment variables in `.env.development`:
    ```env
-   # Backend
-MONGODB_URI=mongodb://localhost:27017/e3dash
-NODE_ENV=development
-JWT_SECRET=your-jwt-secret-key
-
-   # Frontend
-VITE_API_URL=http://localhost:3001
+   MONGODB_URI=mongodb://localhost:27017/<dbname>
+   NODE_ENV=development
+   JWT_SECRET=your-jwt-secret-key
+   VITE_API_URL=http://localhost:3001
    ```
 
 4. Start development servers:
@@ -64,31 +52,6 @@ VITE_API_URL=http://localhost:3001
 The application will be available at:
 - Frontend: http://localhost:5173
 - Backend API: http://localhost:3001
-
-## Environment Variables
-
-Copy `.env.development` and update with your values:
-
-```env
-# Backend
-MONGODB_URI=mongodb://localhost:27017/e3dash
-NODE_ENV=development
-JWT_SECRET=your-jwt-secret-key
-
-# Frontend
-VITE_API_URL=http://localhost:3001
-```
-
-## Usage
-The application is organized with:
-- **Public Dashboard**: View overview and quick stats
-- **Medication**: Add, edit, and delete medication records
-- **Blood Sugar**: Track readings with charts and statistics
-- **Authentication**: Login required for medication and blood sugar features
-
-## Data Storage
-All data is stored in MongoDB with a user authentication system:
-- Users collection with encrypted passwords
 
 ## Deployment
 Deploy to Vercel Production Environment:
