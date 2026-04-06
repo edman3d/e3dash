@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useMedication } from '../../hooks/useMedication';
 import { useMedicationTypes } from '../../hooks/useMedicationTypes';
 import MedicationTypeDrawer from './MedicationTypeDrawer';
+import { getESTDateTimeString } from '../../utils/timezone';
 
 interface MedicationFormData {
   medicationTypeId: string;
@@ -15,7 +16,7 @@ export default function MedicationTracker() {
   const [showDrawer, setShowDrawer] = useState(false);
   const [formData, setFormData] = useState<MedicationFormData>({
     medicationTypeId: '',
-    takenAt: new Date().toISOString().slice(0, 16),
+    takenAt: getESTDateTimeString(),
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -40,7 +41,7 @@ export default function MedicationTracker() {
       
       setFormData({
         medicationTypeId: '',
-        takenAt: new Date().toISOString().slice(0, 16),
+        takenAt: getESTDateTimeString(),
       });
       setShowForm(false);
     } catch (err) {
