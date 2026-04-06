@@ -212,30 +212,30 @@ export default function BloodSugarTracker() {
         ) : (
           readings.map((reading) => (
             <div key={reading._id} className="card">
-              <div className="flex justify-between items-start">
-                <div className="flex-1">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-lg font-semibold text-gray-900">
-                      {reading.value}
-                    </span>
-                  </div>
-                  <div className="mt-2 space-y-1 text-sm text-gray-600">
-                    <p><strong>Measured at:</strong> {new Date(reading.measuredAt).toLocaleDateString('en-US', {
-                      hour: 'numeric',
-                      minute: '2-digit',
-                      hour12: true
-                    })}</p>
-                    {reading.notes && <p><strong>Notes:</strong> {reading.notes}</p>}
-                  </div>
-                </div>
+              <div className="flex items-center justify-between">
+                <span className="text-lg font-semibold text-gray-900">
+                  {reading.value}
+                </span>
+                <span className="text-sm text-gray-600">
+                  {new Date(reading.measuredAt).toLocaleDateString('en-US', {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    hour12: true
+                  })}
+                </span>
                 <button
                   onClick={() => handleDelete(reading._id)}
-                  className="ml-4 text-red-600 hover:text-red-800 text-sm"
+                  className="text-red-600 hover:text-red-800 text-sm"
                   disabled={loading}
                 >
                   Delete
                 </button>
               </div>
+              {reading.notes && (
+                <div className="mt-2 text-sm text-gray-600">
+                  <p><strong>Notes:</strong> {reading.notes}</p>
+                </div>
+              )}
             </div>
           ))
         )}
