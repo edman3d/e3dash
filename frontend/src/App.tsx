@@ -19,7 +19,7 @@ function AppContent() {
   }, [activeTab]);
 
   const { medicationsToday, todaysMedications, latestBloodSugar, loading, error } = useDashboardStats();
-  const { isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
   const [showLogin, setShowLogin] = useState(false);
 
   const tabs = [
@@ -44,13 +44,17 @@ function AppContent() {
                 ) : medicationsToday > 0 ? (
                   <div>
                     <p className="text-3xl font-bold text-primary-600 mb-3">{medicationsToday}</p>
-                    <ul className="space-y-1">
-                      {todaysMedications.map((med) => (
-                        <li key={med._id} className="text-sm text-gray-700">
-                          {med.name} - {med.dosage}
-                        </li>
-                      ))}
-                    </ul>
+                    {user?.username === 'edman3d' ? (
+                      <ul className="space-y-1">
+                        {todaysMedications.map((med) => (
+                          <li key={med._id} className="text-sm text-gray-700">
+                            {med.name} - {med.dosage}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="text-sm text-gray-600">Medication details are private</p>
+                    )}
                   </div>
                 ) : (
                   <p className="text-gray-500">No medications taken today</p>
