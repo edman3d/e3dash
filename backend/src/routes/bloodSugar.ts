@@ -6,13 +6,9 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const { page = 1, limit = 10, startDate, endDate, unit } = req.query;
+    const { page = 1, limit = 10, startDate, endDate } = req.query;
 
     const query: any = {};
-    
-    if (unit) {
-      query.unit = unit;
-    }
     
     if (startDate || endDate) {
       query.measuredAt = {};
@@ -21,7 +17,7 @@ router.get('/', async (req, res) => {
     }
 
     const readings = await BloodSugar.find(query)
-      .select('value unit measuredAt notes') // Include notes field
+      .select('value measuredAt notes') // Remove unit field
       .sort({ measuredAt: -1 })
       .limit(Number(limit) * Number(page))
       .skip((Number(page) - 1) * Number(limit));
@@ -143,7 +139,7 @@ router.get('/stats', async (req, res) => {
 
 router.get('/chart', async (req, res) => {
   try {
-    const { period = 'week', unit } = req.query;
+    const { period = 'week' } = req.query;
 
     const now = new Date();
     let startDate: Date;
@@ -170,10 +166,6 @@ router.get('/chart', async (req, res) => {
     const query: any = {
       measuredAt: { $gte: startDate }
     };
-
-    if (unit) {
-      query.unit = unit;
-    }
 
     const chartData = await BloodSugar.aggregate([
       {

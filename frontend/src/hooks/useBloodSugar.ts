@@ -5,7 +5,6 @@ interface BloodSugar {
   _id: string;
   userId: string;
   value: number;
-  unit: 'mg/dL' | 'mmol/L';
   measuredAt: string;
   notes?: string;
   createdAt: string;
@@ -36,7 +35,7 @@ export function useBloodSugar() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchReadings = async (page = 1, limit = 10, startDate?: string, endDate?: string, unit?: string) => {
+  const fetchReadings = async (page = 1, limit = 10, startDate?: string, endDate?: string) => {
     setLoading(true);
     setError(null);
     try {
@@ -47,7 +46,6 @@ export function useBloodSugar() {
       
       if (startDate) params.append('startDate', startDate);
       if (endDate) params.append('endDate', endDate);
-      if (unit) params.append('unit', unit);
 
       const response = await api.get(`/api/blood-sugar?${params}`);
       setReadings(response.data.readings);
@@ -67,12 +65,9 @@ export function useBloodSugar() {
     }
   };
 
-  const fetchChartData = async (period = 'week', unit?: string) => {
+  const fetchChartData = async (period = 'week') => {
     try {
-      const params = new URLSearchParams({ period });
-      if (unit) params.append('unit', unit);
-      
-      const response = await api.get(`/api/blood-sugar/chart?${params}`);
+      const response = await api.get(`/api/blood-sugar/chart?period=${period}`);
       setChartData(response.data);
     } catch (err: any) {
       console.error('Failed to fetch chart data:', err);

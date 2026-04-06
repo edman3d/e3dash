@@ -8,7 +8,6 @@ export interface IMedication {
 
 export interface IBloodSugar {
   value: number;
-  unit: 'mg/dL' | 'mmol/L';
   measuredAt: Date;
   notes?: string;
   createdAt: Date;

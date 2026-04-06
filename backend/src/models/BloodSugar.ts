@@ -2,7 +2,6 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 interface IBloodSugarDocument extends Document {
   value: number;
-  unit: 'mg/dL' | 'mmol/L';
   measuredAt: Date;
   notes?: string;
   createdAt: Date;
@@ -14,12 +13,6 @@ const bloodSugarSchema = new Schema<IBloodSugarDocument>({
     required: true,
     min: 0,
     max: 1000
-  },
-  unit: {
-    type: String,
-    required: true,
-    enum: ['mg/dL', 'mmol/L'],
-    default: 'mg/dL'
   },
   measuredAt: {
     type: Date,

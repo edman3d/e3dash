@@ -5,7 +5,6 @@ import { getESTDateTimeString } from '../../utils/timezone';
 
 interface BloodSugarFormData {
   value: string;
-  unit: 'mg/dL' | 'mmol/L';
   measuredAt: string;
   notes: string;
 }
@@ -16,7 +15,6 @@ export default function BloodSugarTracker() {
   const [chartPeriod, setChartPeriod] = useState('week');
   const [formData, setFormData] = useState<BloodSugarFormData>({
     value: '',
-    unit: 'mg/dL',
     measuredAt: getESTDateTimeString(),
     notes: '',
   });
@@ -26,13 +24,11 @@ export default function BloodSugarTracker() {
     try {
       await addReading({
         value: parseFloat(formData.value),
-        unit: formData.unit,
         measuredAt: formData.measuredAt,
         notes: formData.notes || undefined,
       });
       setFormData({
         value: '',
-        unit: 'mg/dL',
         measuredAt: getESTDateTimeString(),
         notes: '',
       });
@@ -101,20 +97,6 @@ export default function BloodSugarTracker() {
                   className="input"
                   placeholder="e.g., 95"
                 />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Unit
-                </label>
-                <select
-                  value={formData.unit}
-                  onChange={(e) => setFormData({ ...formData, unit: e.target.value as 'mg/dL' | 'mmol/L' })}
-                  className="input"
-                >
-                  <option value="mg/dL">mg/dL</option>
-                  <option value="mmol/L">mmol/L</option>
-                </select>
               </div>
 
               <div>
@@ -202,7 +184,7 @@ export default function BloodSugarTracker() {
               <XAxis dataKey="_id" />
               <YAxis />
               <Tooltip 
-                formatter={(value) => [`${value} mg/dL`, 'Average']}
+                formatter={(value) => [`${value}`, 'Average']}
                 labelFormatter={(label) => `Date: ${label}`}
               />
               <Line 
@@ -234,7 +216,7 @@ export default function BloodSugarTracker() {
                 <div className="flex-1">
                   <div className="flex items-center space-x-2">
                     <span className="text-lg font-semibold text-gray-900">
-                      {reading.value} {reading.unit}
+                      {reading.value}
                     </span>
                   </div>
                   <div className="mt-2 space-y-1 text-sm text-gray-600">
