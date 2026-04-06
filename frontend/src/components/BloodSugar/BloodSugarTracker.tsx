@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useBloodSugar } from '../../hooks/useBloodSugar';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { getESTDateTimeString } from '../../utils/timezone';
 
 interface BloodSugarFormData {
   value: string;
@@ -16,7 +17,7 @@ export default function BloodSugarTracker() {
   const [formData, setFormData] = useState<BloodSugarFormData>({
     value: '',
     unit: 'mg/dL',
-    measuredAt: new Date().toISOString().slice(0, 16),
+    measuredAt: getESTDateTimeString(),
     notes: '',
   });
 
@@ -32,7 +33,7 @@ export default function BloodSugarTracker() {
       setFormData({
         value: '',
         unit: 'mg/dL',
-        measuredAt: new Date().toISOString().slice(0, 16),
+        measuredAt: getESTDateTimeString(),
         notes: '',
       });
       setShowForm(false);
