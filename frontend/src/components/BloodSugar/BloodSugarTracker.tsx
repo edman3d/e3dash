@@ -83,27 +83,6 @@ export default function BloodSugarTracker() {
         </div>
       )}
 
-      <div className="card p-4">
-        <div className="grid grid-cols-4 gap-2 text-center">
-          <div>
-            <span className="text-xs font-medium text-gray-500 block">Avg</span>
-            <span className="text-sm font-bold text-gray-900">{stats.avgValue.toFixed(1)}</span>
-          </div>
-          <div>
-            <span className="text-xs font-medium text-gray-500 block">Min</span>
-            <span className="text-sm font-bold text-gray-900">{stats.minValue}</span>
-          </div>
-          <div>
-            <span className="text-xs font-medium text-gray-500 block">Max</span>
-            <span className="text-sm font-bold text-gray-900">{stats.maxValue}</span>
-          </div>
-          <div>
-            <span className="text-xs font-medium text-gray-500 block">Total</span>
-            <span className="text-sm font-bold text-gray-900">{stats.totalReadings}</span>
-          </div>
-        </div>
-      </div>
-
       {showForm && (
         <div className="card">
           <h3 className="text-lg font-semibold mb-4">Add New Reading</h3>
@@ -180,6 +159,27 @@ export default function BloodSugarTracker() {
           </form>
         </div>
       )}
+
+      <div className="card p-4">
+        <div className="grid grid-cols-4 gap-2 text-center">
+          <div>
+            <span className="text-xs font-medium text-gray-500 block">Avg</span>
+            <span className="text-sm font-bold text-gray-900">{stats.avgValue.toFixed(1)}</span>
+          </div>
+          <div>
+            <span className="text-xs font-medium text-gray-500 block">Min</span>
+            <span className="text-sm font-bold text-gray-900">{stats.minValue}</span>
+          </div>
+          <div>
+            <span className="text-xs font-medium text-gray-500 block">Max</span>
+            <span className="text-sm font-bold text-gray-900">{stats.maxValue}</span>
+          </div>
+          <div>
+            <span className="text-xs font-medium text-gray-500 block">Total</span>
+            <span className="text-sm font-bold text-gray-900">{stats.totalReadings}</span>
+          </div>
+        </div>
+      </div>
 
       <div className="card">
         <div className="flex justify-between items-center mb-4">
