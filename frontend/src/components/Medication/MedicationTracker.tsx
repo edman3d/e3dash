@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useMedication } from '../../hooks/useMedication';
 import { useMedicationTypes } from '../../hooks/useMedicationTypes';
 import MedicationTypeDrawer from './MedicationTypeDrawer';
-import { getESTDateTimeString } from '../../utils/timezone';
+import { getESTDateTimeString, formatToEST } from '../../utils/timezone';
+import { Pill, Plus, Settings, Trash2, Calendar, Clock, X } from 'lucide-react';
 
 interface MedicationFormData {
   medicationTypeId: string;
@@ -94,11 +95,15 @@ export default function MedicationTracker() {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900">Medication Tracker</h2>
+        <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+          <Pill className="mr-3 text-blue-500" />
+          Medication Tracker
+        </h2>
         <button
           onClick={() => setShowDrawer(true)}
-          className="btn btn-secondary"
+          className="btn btn-secondary flex items-center"
         >
+          <Settings className="mr-2" size={16} />
           Configure Medications
         </button>
       </div>
@@ -110,12 +115,25 @@ export default function MedicationTracker() {
       )}
 
       <div className="flex justify-between items-center">
-        <h3 className="text-lg font-medium text-gray-900">Add Medication Intake</h3>
+        <h3 className="text-lg font-medium text-gray-900 flex items-center">
+          <Plus className="mr-2" size={20} />
+          Add Medication Intake
+        </h3>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="btn btn-primary"
+          className="btn btn-primary flex items-center"
         >
-          {showForm ? 'Cancel' : 'Add Medication'}
+          {showForm ? (
+            <>
+              <X className="mr-2" size={16} />
+              Cancel
+            </>
+          ) : (
+            <>
+              <Plus className="mr-2" size={16} />
+              Add Medication
+            </>
+          )}
         </button>
       </div>
 
@@ -123,7 +141,8 @@ export default function MedicationTracker() {
         <div className="card">
           <form onSubmit={handleSubmit} className="space-y-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
+                <Pill className="mr-2" size={16} />
                 Medication
               </label>
               <select
@@ -147,7 +166,8 @@ export default function MedicationTracker() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
+                <Calendar className="mr-2" size={16} />
                 Taken At
               </label>
               <input
@@ -176,7 +196,10 @@ export default function MedicationTracker() {
       )}
 
       <div className="space-y-3">
-        <h3 className="text-lg font-medium text-gray-900">Today's Intakes</h3>
+        <h3 className="text-lg font-medium text-gray-900 flex items-center">
+          <Calendar className="mr-2" size={20} />
+          Today's Intakes
+        </h3>
         {getTodaysIntakes().length === 0 ? (
           <div className="text-center py-4 text-gray-500">
             No intakes recorded for today yet.
@@ -188,19 +211,16 @@ export default function MedicationTracker() {
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900">{medication.name}</h3>
                   <div className="mt-1 space-y-1 text-sm text-gray-600">
-                    <p><strong>Dosage:</strong> {medication.dosage}</p>
-                    <p><strong>Taken at:</strong> {new Date(medication.takenAt).toLocaleDateString('en-US', {
-                      hour: 'numeric',
-                      minute: '2-digit',
-                      hour12: true
-                    })}</p>
+                    <p className="flex items-center"><strong className="mr-2">Dosage:</strong> {medication.dosage}</p>
+                    <p className="flex items-center"><Clock className="mr-2" size={14} /><strong>Taken at:</strong> {formatToEST(medication.takenAt)}</p>
                   </div>
                 </div>
                 <button
                   onClick={() => handleDelete(medication._id)}
-                  className="ml-4 text-red-600 hover:text-red-800 text-sm"
+                  className="ml-4 text-red-600 hover:text-red-800 text-sm flex items-center"
                   disabled={loading}
                 >
+                  <Trash2 className="mr-1" size={14} />
                   Delete
                 </button>
               </div>
@@ -210,7 +230,10 @@ export default function MedicationTracker() {
       </div>
 
       <div className="space-y-3">
-        <h3 className="text-lg font-medium text-gray-900">Recent Intakes</h3>
+        <h3 className="text-lg font-medium text-gray-900 flex items-center">
+          <Clock className="mr-2" size={20} />
+          Recent Intakes
+        </h3>
         {getRecentIntakes().length === 0 ? (
           <div className="text-center py-4 text-gray-500">
             No recent intakes found.
@@ -222,19 +245,16 @@ export default function MedicationTracker() {
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900">{medication.name}</h3>
                   <div className="mt-1 space-y-1 text-sm text-gray-600">
-                    <p><strong>Dosage:</strong> {medication.dosage}</p>
-                    <p><strong>Taken at:</strong> {new Date(medication.takenAt).toLocaleDateString('en-US', {
-                      hour: 'numeric',
-                      minute: '2-digit',
-                      hour12: true
-                    })}</p>
+                    <p className="flex items-center"><strong className="mr-2">Dosage:</strong> {medication.dosage}</p>
+                    <p className="flex items-center"><Clock className="mr-2" size={14} /><strong>Taken at:</strong> {formatToEST(medication.takenAt)}</p>
                   </div>
                 </div>
                 <button
                   onClick={() => handleDelete(medication._id)}
-                  className="ml-4 text-red-600 hover:text-red-800 text-sm"
+                  className="ml-4 text-red-600 hover:text-red-800 text-sm flex items-center"
                   disabled={loading}
                 >
+                  <Trash2 className="mr-1" size={14} />
                   Delete
                 </button>
               </div>
