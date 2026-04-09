@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useMedication } from '../../hooks/useMedication';
 import { useMedicationTypes } from '../../hooks/useMedicationTypes';
 import MedicationTypeDrawer from './MedicationTypeDrawer';
-import { getESTDateTimeString, formatToEST } from '../../utils/timezone';
+import { getESTDateTimeString, formatToEST, toUTCISOString } from '../../utils/timezone';
 // Inline SVG Icons
 
 interface MedicationFormData {
@@ -37,7 +37,7 @@ export default function MedicationTracker() {
         name: selectedType.name,
         dosage: selectedType.dosage,
         frequency: 'as needed',
-        takenAt: formData.takenAt,
+        takenAt: toUTCISOString(formData.takenAt),
       });
       
       setFormData({

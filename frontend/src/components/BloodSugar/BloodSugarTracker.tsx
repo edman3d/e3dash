@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useBloodSugar } from '../../hooks/useBloodSugar';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { getESTDateTimeString, formatToEST } from '../../utils/timezone';
+import { getESTDateTimeString, formatToEST, toUTCISOString } from '../../utils/timezone';
 // Inline SVG Icons
 
 interface BloodSugarFormData {
@@ -25,7 +25,7 @@ export default function BloodSugarTracker() {
     try {
       await addReading({
         value: parseFloat(formData.value),
-        measuredAt: formData.measuredAt,
+        measuredAt: toUTCISOString(formData.measuredAt),
         notes: formData.notes || undefined,
       });
       setFormData({

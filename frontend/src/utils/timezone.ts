@@ -3,28 +3,34 @@
  */
 
 /**
- * Gets the current date-time string in EST timezone (UTC-5)
+ * Gets the current date-time string in local timezone
  * Format: YYYY-MM-DDTHH:MM (for datetime-local input)
  */
-export const getESTDateTimeString = (): string => {
+export const getLocalDateTimeString = (): string => {
   const now = new Date();
-  // Use America/New_York timezone which handles EST/EDT automatically
-  const estTime = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
   
   // Format as YYYY-MM-DDTHH:MM for datetime-local input
-  const year = estTime.getFullYear();
-  const month = String(estTime.getMonth() + 1).padStart(2, '0');
-  const day = String(estTime.getDate()).padStart(2, '0');
-  const hours = String(estTime.getHours()).padStart(2, '0');
-  const minutes = String(estTime.getMinutes()).padStart(2, '0');
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
   
   return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
 
 /**
- * Converts a UTC date string to EST timezone display format
+ * Converts a local datetime string to UTC ISO string for storage
  */
-export const formatToEST = (dateString: string): string => {
+export const toUTCISOString = (localDateTimeString: string): string => {
+  const date = new Date(localDateTimeString);
+  return date.toISOString();
+};
+
+/**
+ * Converts a UTC date string to local timezone display format
+ */
+export const formatToLocal = (dateString: string): string => {
   const date = new Date(dateString);
   
   return date.toLocaleDateString('en-US', {
@@ -38,3 +44,7 @@ export const formatToEST = (dateString: string): string => {
     timeZone: 'America/New_York'
   });
 };
+
+// Keep backward compatibility
+export const getESTDateTimeString = getLocalDateTimeString;
+export const formatToEST = formatToLocal;
