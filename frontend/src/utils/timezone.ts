@@ -26,11 +26,12 @@ export const getESTDateTimeString = (): string => {
  */
 export const formatToEST = (dateString: string): string => {
   const date = new Date(dateString);
-  // Adjust for EST (UTC-5)
-  const estOffset = 5 * 60; // 5 hours in minutes
-  const estTime = new Date(date.getTime() + (date.getTimezoneOffset() + estOffset) * 60000);
   
-  return estTime.toLocaleDateString('en-US', {
+  return date.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
     hour: 'numeric',
     minute: '2-digit',
     hour12: true,

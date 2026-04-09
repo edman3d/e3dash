@@ -242,7 +242,8 @@ export default function BloodSugarTracker() {
           readings.map((reading) => (
             <div key={reading._id} className="card">
               <div className="flex items-center justify-between">
-                <span className="text-lg font-semibold text-gray-900">
+                <span className="text-lg font-semibold text-gray-900 flex items-center">
+                  <TrendingUp className="mr-2" size={16} />
                   {reading.value}
                 </span>
                 <span className="text-sm text-gray-600">
