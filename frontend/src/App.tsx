@@ -4,7 +4,7 @@ import BloodSugarTracker from './components/BloodSugar/BloodSugarTracker';
 import { useDashboardStats } from './hooks/useDashboardStats';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import LoginForm from './components/Auth/LoginForm';
-// Icons removed
+// Inline SVG Icons
 import './App.css';
 
 function AppContent() {
@@ -24,9 +24,9 @@ function AppContent() {
   const [showLogin, setShowLogin] = useState(false);
 
   const tabs = [
-    { id: 'dashboard', name: 'Dashboard' },
-    { id: 'medication', name: 'Medication', protected: true },
-    { id: 'bloodSugar', name: 'Blood Sugar', protected: true },
+    { id: 'dashboard', name: 'Dashboard', icon: <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" /></svg> },
+    { id: 'medication', name: 'Medication', protected: true, icon: <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg> },
+    { id: 'bloodSugar', name: 'Blood Sugar', protected: true, icon: <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" /></svg> },
   ];
 
   const renderContent = () => {
@@ -34,12 +34,14 @@ function AppContent() {
       case 'dashboard':
         return (
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4 flex items-center">
+              <svg className="w-8 h-8 mr-3 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" /></svg>
               Health Dashboard
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="card">
-                <h2 className="text-lg font-semibold mb-2">
+                <h2 className="text-lg font-semibold mb-2 flex items-center">
+                  <svg className="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg>
                   Medications Today
                 </h2>
                 {loading ? (
@@ -66,7 +68,8 @@ function AppContent() {
                 )}
               </div>
               <div className="card">
-                <h2 className="text-lg font-semibold mb-2">
+                <h2 className="text-lg font-semibold mb-2 flex items-center">
+                  <svg className="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" /></svg>
                   Latest Blood Sugar
                 </h2>
                 {loading ? (
@@ -139,7 +142,7 @@ function AppContent() {
                   <button
                     key={tab.id}
                     onClick={() => handleTabClick(tab.id, isProtected)}
-                    className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                    className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center ${
                       activeTab === tab.id
                         ? 'border-primary-500 text-primary-600'
                         : isProtected
@@ -147,6 +150,7 @@ function AppContent() {
                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }`}
                   >
+                    {tab.icon}
                     {tab.name}
                     {isProtected && ' 🔒'}
                   </button>
@@ -158,8 +162,9 @@ function AppContent() {
                     logout();
                     setIsMobileMenuOpen(false);
                   }}
-                  className="text-sm text-red-600 hover:text-red-800"
+                  className="text-sm text-red-600 hover:text-red-800 flex items-center"
                 >
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clipRule="evenodd" /></svg>
                   Logout
                 </button>
               )}
@@ -176,7 +181,7 @@ function AppContent() {
                     <button
                       key={tab.id}
                       onClick={() => handleTabClick(tab.id, isProtected)}
-                      className={`block w-full text-left px-3 py-2 text-base font-medium ${
+                      className={`block w-full text-left px-3 py-2 text-base font-medium flex items-center ${
                         activeTab === tab.id
                           ? 'bg-primary-50 border-l-4 border-primary-500 text-primary-700'
                           : isProtected
@@ -184,7 +189,8 @@ function AppContent() {
                           : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                       }`}
                     >
-                      {tab.name}
+                      {tab.icon}
+                    {tab.name}
                       {isProtected && ' 🔒'}
                     </button>
                   );
@@ -195,9 +201,10 @@ function AppContent() {
                       logout();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="block w-full text-left px-3 py-2 text-base font-medium text-red-600 hover:text-red-800 hover:bg-red-50"
+                    className="block w-full text-left px-3 py-2 text-base font-medium text-red-600 hover:text-red-800 hover:bg-red-50 flex items-center"
                   >
-                    Logout
+                    <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clipRule="evenodd" /></svg>
+                  Logout
                   </button>
                 )}
               </nav>
