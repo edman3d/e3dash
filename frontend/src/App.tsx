@@ -4,7 +4,7 @@ import BloodSugarTracker from './components/BloodSugar/BloodSugarTracker';
 import { useDashboardStats } from './hooks/useDashboardStats';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import LoginForm from './components/Auth/LoginForm';
-import { Heart, Pill, Activity, LogOut, Menu, X } from 'lucide-react';
+// Icons removed
 import './App.css';
 
 function AppContent() {
@@ -24,9 +24,9 @@ function AppContent() {
   const [showLogin, setShowLogin] = useState(false);
 
   const tabs = [
-    { id: 'dashboard', name: 'Dashboard', icon: Heart },
-    { id: 'medication', name: 'Medication', protected: true, icon: Pill },
-    { id: 'bloodSugar', name: 'Blood Sugar', protected: true, icon: Activity },
+    { id: 'dashboard', name: 'Dashboard' },
+    { id: 'medication', name: 'Medication', protected: true },
+    { id: 'bloodSugar', name: 'Blood Sugar', protected: true },
   ];
 
   const renderContent = () => {
@@ -34,14 +34,12 @@ function AppContent() {
       case 'dashboard':
         return (
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-4 flex items-center">
-              <Heart className="mr-3 text-red-500" />
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">
               Health Dashboard
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="card">
-                <h2 className="text-lg font-semibold mb-2 flex items-center">
-                  <Pill className="mr-2 text-blue-500" size={20} />
+                <h2 className="text-lg font-semibold mb-2">
                   Medications Today
                 </h2>
                 {loading ? (
@@ -68,8 +66,7 @@ function AppContent() {
                 )}
               </div>
               <div className="card">
-                <h2 className="text-lg font-semibold mb-2 flex items-center">
-                  <Activity className="mr-2 text-green-500" size={20} />
+                <h2 className="text-lg font-semibold mb-2">
                   Latest Blood Sugar
                 </h2>
                 {loading ? (
@@ -130,11 +127,7 @@ function AppContent() {
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900"
               >
-                {isMobileMenuOpen ? (
-                  <X className="h-6 w-6" />
-                ) : (
-                  <Menu className="h-6 w-6" />
-                )}
+                {isMobileMenuOpen ? '✕' : '☰'}
               </button>
             </div>
 
@@ -146,7 +139,7 @@ function AppContent() {
                   <button
                     key={tab.id}
                     onClick={() => handleTabClick(tab.id, isProtected)}
-                    className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center ${
+                    className={`py-2 px-1 border-b-2 font-medium text-sm ${
                       activeTab === tab.id
                         ? 'border-primary-500 text-primary-600'
                         : isProtected
@@ -154,7 +147,6 @@ function AppContent() {
                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }`}
                   >
-                    <tab.icon className="mr-2" size={16} />
                     {tab.name}
                     {isProtected && ' 🔒'}
                   </button>
@@ -166,9 +158,8 @@ function AppContent() {
                     logout();
                     setIsMobileMenuOpen(false);
                   }}
-                  className="text-sm text-red-600 hover:text-red-800 flex items-center"
+                  className="text-sm text-red-600 hover:text-red-800"
                 >
-                  <LogOut className="mr-2" size={16} />
                   Logout
                 </button>
               )}
@@ -185,7 +176,7 @@ function AppContent() {
                     <button
                       key={tab.id}
                       onClick={() => handleTabClick(tab.id, isProtected)}
-                      className={`block w-full text-left px-3 py-2 text-base font-medium flex items-center ${
+                      className={`block w-full text-left px-3 py-2 text-base font-medium ${
                         activeTab === tab.id
                           ? 'bg-primary-50 border-l-4 border-primary-500 text-primary-700'
                           : isProtected
@@ -193,7 +184,6 @@ function AppContent() {
                           : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                       }`}
                     >
-                      <tab.icon className="mr-3" size={18} />
                       {tab.name}
                       {isProtected && ' 🔒'}
                     </button>
@@ -205,9 +195,8 @@ function AppContent() {
                       logout();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="block w-full text-left px-3 py-2 text-base font-medium text-red-600 hover:text-red-800 hover:bg-red-50 flex items-center"
+                    className="block w-full text-left px-3 py-2 text-base font-medium text-red-600 hover:text-red-800 hover:bg-red-50"
                   >
-                    <LogOut className="mr-3" size={18} />
                     Logout
                   </button>
                 )}

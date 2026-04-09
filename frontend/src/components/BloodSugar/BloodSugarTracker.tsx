@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useBloodSugar } from '../../hooks/useBloodSugar';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { getESTDateTimeString, formatToEST } from '../../utils/timezone';
-import { Trash2, Plus, TrendingUp, Calendar, Clock, User, X } from 'lucide-react';
+// Icons removed
 
 interface BloodSugarFormData {
   value: string;
@@ -65,25 +65,14 @@ export default function BloodSugarTracker() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900 flex items-center">
-          <TrendingUp className="mr-3 text-green-500" />
+        <h2 className="text-2xl font-bold text-gray-900">
           Blood Sugar Monitor
         </h2>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="btn btn-primary flex items-center"
+          className="btn btn-primary"
         >
-          {showForm ? (
-            <>
-              <X className="mr-2" size={16} />
-              Cancel
-            </>
-          ) : (
-            <>
-              <Plus className="mr-2" size={16} />
-              Add Reading
-            </>
-          )}
+          {showForm ? 'Cancel' : 'Add Reading'}
         </button>
       </div>
 
@@ -99,8 +88,7 @@ export default function BloodSugarTracker() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
-                  <TrendingUp className="mr-2" size={16} />
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Blood Sugar Value
                 </label>
                 <input
@@ -115,8 +103,7 @@ export default function BloodSugarTracker() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
-                  <Calendar className="mr-2" size={16} />
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Measured At
                 </label>
                 <input
@@ -129,8 +116,7 @@ export default function BloodSugarTracker() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
-                  <Clock className="mr-2" size={16} />
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Notes (optional)
                 </label>
                 <input
@@ -162,29 +148,25 @@ export default function BloodSugarTracker() {
       <div className="card p-4">
         <div className="grid grid-cols-4 gap-2 text-center">
           <div>
-            <span className="text-xs font-medium text-gray-500 block flex items-center justify-center">
-              <TrendingUp className="mr-1" size={12} />
+            <span className="text-xs font-medium text-gray-500 block">
               Avg
             </span>
             <span className="text-sm font-bold text-gray-900">{stats.avgValue.toFixed(1)}</span>
           </div>
           <div>
-            <span className="text-xs font-medium text-gray-500 block flex items-center justify-center">
-              <TrendingUp className="mr-1 rotate-180" size={12} />
+            <span className="text-xs font-medium text-gray-500 block">
               Min
             </span>
             <span className="text-sm font-bold text-gray-900">{stats.minValue}</span>
           </div>
           <div>
-            <span className="text-xs font-medium text-gray-500 block flex items-center justify-center">
-              <TrendingUp className="mr-1" size={12} />
+            <span className="text-xs font-medium text-gray-500 block">
               Max
             </span>
             <span className="text-sm font-bold text-gray-900">{stats.maxValue}</span>
           </div>
           <div>
-            <span className="text-xs font-medium text-gray-500 block flex items-center justify-center">
-              <User className="mr-1" size={12} />
+            <span className="text-xs font-medium text-gray-500 block">
               Total
             </span>
             <span className="text-sm font-bold text-gray-900">{stats.totalReadings}</span>
@@ -242,8 +224,7 @@ export default function BloodSugarTracker() {
           readings.map((reading) => (
             <div key={reading._id} className="card">
               <div className="flex items-center justify-between">
-                <span className="text-lg font-semibold text-gray-900 flex items-center">
-                  <TrendingUp className="mr-2" size={16} />
+                <span className="text-lg font-semibold text-gray-900">
                   {reading.value}
                 </span>
                 <span className="text-sm text-gray-600">
@@ -251,10 +232,9 @@ export default function BloodSugarTracker() {
                 </span>
                 <button
                   onClick={() => handleDelete(reading._id)}
-                  className="text-red-600 hover:text-red-800 text-sm flex items-center"
+                  className="text-red-600 hover:text-red-800 text-sm"
                   disabled={loading}
                 >
-                  <Trash2 className="mr-1" size={14} />
                   Delete
                 </button>
               </div>

@@ -3,7 +3,7 @@ import { useMedication } from '../../hooks/useMedication';
 import { useMedicationTypes } from '../../hooks/useMedicationTypes';
 import MedicationTypeDrawer from './MedicationTypeDrawer';
 import { getESTDateTimeString, formatToEST } from '../../utils/timezone';
-import { Pill, Plus, Settings, Trash2, Calendar, Clock, X } from 'lucide-react';
+// Icons removed
 
 interface MedicationFormData {
   medicationTypeId: string;
@@ -95,15 +95,13 @@ export default function MedicationTracker() {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900 flex items-center">
-          <Pill className="mr-3 text-blue-500" />
+        <h2 className="text-2xl font-bold text-gray-900">
           Medication Tracker
         </h2>
         <button
           onClick={() => setShowDrawer(true)}
-          className="btn btn-secondary flex items-center"
+          className="btn btn-secondary"
         >
-          <Settings className="mr-2" size={16} />
           Configure Medications
         </button>
       </div>
@@ -115,25 +113,14 @@ export default function MedicationTracker() {
       )}
 
       <div className="flex justify-between items-center">
-        <h3 className="text-lg font-medium text-gray-900 flex items-center">
-          <Plus className="mr-2" size={20} />
+        <h3 className="text-lg font-medium text-gray-900">
           Add Medication Intake
         </h3>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="btn btn-primary flex items-center"
+          className="btn btn-primary"
         >
-          {showForm ? (
-            <>
-              <X className="mr-2" size={16} />
-              Cancel
-            </>
-          ) : (
-            <>
-              <Plus className="mr-2" size={16} />
-              Add Medication
-            </>
-          )}
+          {showForm ? 'Cancel' : 'Add Medication'}
         </button>
       </div>
 
@@ -141,8 +128,7 @@ export default function MedicationTracker() {
         <div className="card">
           <form onSubmit={handleSubmit} className="space-y-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
-                <Pill className="mr-2" size={16} />
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Medication
               </label>
               <select
@@ -166,8 +152,7 @@ export default function MedicationTracker() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
-                <Calendar className="mr-2" size={16} />
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Taken At
               </label>
               <input
@@ -196,8 +181,7 @@ export default function MedicationTracker() {
       )}
 
       <div className="space-y-3">
-        <h3 className="text-lg font-medium text-gray-900 flex items-center">
-          <Calendar className="mr-2" size={20} />
+        <h3 className="text-lg font-medium text-gray-900">
           Today's Intakes
         </h3>
         {getTodaysIntakes().length === 0 ? (
@@ -211,16 +195,15 @@ export default function MedicationTracker() {
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900">{medication.name}</h3>
                   <div className="mt-1 space-y-1 text-sm text-gray-600">
-                    <p className="flex items-center"><Pill className="mr-2" size={14} /><strong className="mr-2">Dosage:</strong> {medication.dosage}</p>
-                    <p className="flex items-center"><Clock className="mr-2" size={14} /><strong className="mr-2">Taken at:</strong> {formatToEST(medication.takenAt)}</p>
+                    <p><strong>Dosage:</strong> {medication.dosage}</p>
+                    <p><strong>Taken at:</strong> {formatToEST(medication.takenAt)}</p>
                   </div>
                 </div>
                 <button
                   onClick={() => handleDelete(medication._id)}
-                  className="ml-4 text-red-600 hover:text-red-800 text-sm flex items-center"
+                  className="ml-4 text-red-600 hover:text-red-800 text-sm"
                   disabled={loading}
                 >
-                  <Trash2 className="mr-1" size={14} />
                   Delete
                 </button>
               </div>
@@ -230,8 +213,7 @@ export default function MedicationTracker() {
       </div>
 
       <div className="space-y-3">
-        <h3 className="text-lg font-medium text-gray-900 flex items-center">
-          <Clock className="mr-2" size={20} />
+        <h3 className="text-lg font-medium text-gray-900">
           Recent Intakes
         </h3>
         {getRecentIntakes().length === 0 ? (
@@ -245,16 +227,15 @@ export default function MedicationTracker() {
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900">{medication.name}</h3>
                   <div className="mt-1 space-y-1 text-sm text-gray-600">
-                    <p className="flex items-center"><Pill className="mr-2" size={14} /><strong className="mr-2">Dosage:</strong> {medication.dosage}</p>
-                    <p className="flex items-center"><Clock className="mr-2" size={14} /><strong className="mr-2">Taken at:</strong> {formatToEST(medication.takenAt)}</p>
+                    <p><strong>Dosage:</strong> {medication.dosage}</p>
+                    <p><strong>Taken at:</strong> {formatToEST(medication.takenAt)}</p>
                   </div>
                 </div>
                 <button
                   onClick={() => handleDelete(medication._id)}
-                  className="ml-4 text-red-600 hover:text-red-800 text-sm flex items-center"
+                  className="ml-4 text-red-600 hover:text-red-800 text-sm"
                   disabled={loading}
                 >
-                  <Trash2 className="mr-1" size={14} />
                   Delete
                 </button>
               </div>
