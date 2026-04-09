@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import api from '../services/api';
+import { formatToEST } from '../utils/timezone';
 
 interface BloodSugarInfo {
   value: number;
@@ -17,7 +18,7 @@ interface DashboardStats {
   fetchStats: () => Promise<void>;
 }
 
-export function useDashboardStats(): DashboardStats {
+export function useDashboardStats(activeTab: string): DashboardStats {
   const [medicationsToday, setMedicationsToday] = useState<number>(0);
   const [todaysMedications, setTodaysMedications] = useState<any[]>([]);
   const [latestBloodSugar, setLatestBloodSugar] = useState<BloodSugarInfo | null>(null);
@@ -56,12 +57,7 @@ export function useDashboardStats(): DashboardStats {
       
       if (bloodSugarResponse.data.readings && bloodSugarResponse.data.readings.length > 0) {
         const latest = bloodSugarResponse.data.readings[0];
-        const measuredDate = new Date(latest.measuredAt);
-        const dateStr = measuredDate.toLocaleDateString('en-US', {
-          hour: 'numeric',
-          minute: '2-digit',
-          hour12: true
-        });
+        const dateStr = formatToEST(latest.measuredAt);
         const notesStr = latest.notes ? latest.notes.trim() : '';
         setLatestBloodSugar({
           value: latest.value,
@@ -80,8 +76,10 @@ export function useDashboardStats(): DashboardStats {
   }, []);
 
   useEffect(() => {
-    fetchStats();
-  }, [fetchStats]);
+    if (activeTab === 'dashboard') {
+      fetchStats();
+    }
+  }, [fetchStats, activeTab]);
 
   return {
     medicationsToday,

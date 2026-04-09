@@ -19,7 +19,7 @@ function AppContent() {
     localStorage.setItem('activeTab', activeTab);
   }, [activeTab]);
 
-  const { medicationsToday, todaysMedications, latestBloodSugar, loading, error } = useDashboardStats();
+  const { medicationsToday, todaysMedications, latestBloodSugar, loading, error } = useDashboardStats(activeTab);
   const { user, isAuthenticated, logout } = useAuth();
   const [showLogin, setShowLogin] = useState(false);
 

@@ -211,8 +211,8 @@ export default function MedicationTracker() {
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900">{medication.name}</h3>
                   <div className="mt-1 space-y-1 text-sm text-gray-600">
-                    <p className="flex items-center"><strong className="mr-2">Dosage:</strong> {medication.dosage}</p>
-                    <p className="flex items-center"><Clock className="mr-2" size={14} /><strong>Taken at:</strong> {formatToEST(medication.takenAt)}</p>
+                    <p className="flex items-center"><Pill className="mr-2" size={14} /><strong className="mr-2">Dosage:</strong> {medication.dosage}</p>
+                    <p className="flex items-center"><Clock className="mr-2" size={14} /><strong className="mr-2">Taken at:</strong> {formatToEST(medication.takenAt)}</p>
                   </div>
                 </div>
                 <button
@@ -245,8 +245,8 @@ export default function MedicationTracker() {
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900">{medication.name}</h3>
                   <div className="mt-1 space-y-1 text-sm text-gray-600">
-                    <p className="flex items-center"><strong className="mr-2">Dosage:</strong> {medication.dosage}</p>
-                    <p className="flex items-center"><Clock className="mr-2" size={14} /><strong>Taken at:</strong> {formatToEST(medication.takenAt)}</p>
+                    <p className="flex items-center"><Pill className="mr-2" size={14} /><strong className="mr-2">Dosage:</strong> {medication.dosage}</p>
+                    <p className="flex items-center"><Clock className="mr-2" size={14} /><strong className="mr-2">Taken at:</strong> {formatToEST(medication.takenAt)}</p>
                   </div>
                 </div>
                 <button
