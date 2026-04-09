@@ -3,7 +3,7 @@ import { useMedication } from '../../hooks/useMedication';
 import { useMedicationTypes } from '../../hooks/useMedicationTypes';
 import MedicationTypeDrawer from './MedicationTypeDrawer';
 import { getESTDateTimeString, formatToEST } from '../../utils/timezone';
-// Icons removed
+// Inline SVG Icons
 
 interface MedicationFormData {
   medicationTypeId: string;
@@ -95,13 +95,15 @@ export default function MedicationTracker() {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900">
+        <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+          <svg className="w-6 h-6 mr-3 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg>
           Medication Tracker
         </h2>
         <button
           onClick={() => setShowDrawer(true)}
-          className="btn btn-secondary"
+          className="btn btn-secondary flex items-center"
         >
+          <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287-.947c1.561.379 1.561 2.6 0 2.978-.54.886.061 2.042.947 2.287 1.372.836 2.942-.734 2.106-2.106a1.532 1.532 0 01-.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287.947c-1.561-.379-1.561-2.6 0-2.978.54-.886-.061-2.042-.947-2.287-1.372-.836-2.942.734-2.106 2.106z" clipRule="evenodd" /></svg>
           Configure Medications
         </button>
       </div>
@@ -113,14 +115,25 @@ export default function MedicationTracker() {
       )}
 
       <div className="flex justify-between items-center">
-        <h3 className="text-lg font-medium text-gray-900">
+        <h3 className="text-lg font-medium text-gray-900 flex items-center">
+          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" /></svg>
           Add Medication Intake
         </h3>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="btn btn-primary"
+          className="btn btn-primary flex items-center"
         >
-          {showForm ? 'Cancel' : 'Add Medication'}
+          {showForm ? (
+            <>
+              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+              Cancel
+            </>
+          ) : (
+            <>
+              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" /></svg>
+              Add Medication
+            </>
+          )}
         </button>
       </div>
 
@@ -128,7 +141,8 @@ export default function MedicationTracker() {
         <div className="card">
           <form onSubmit={handleSubmit} className="space-y-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
+                <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg>
                 Medication
               </label>
               <select
@@ -152,7 +166,8 @@ export default function MedicationTracker() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
+                <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg>
                 Taken At
               </label>
               <input
@@ -181,7 +196,8 @@ export default function MedicationTracker() {
       )}
 
       <div className="space-y-3">
-        <h3 className="text-lg font-medium text-gray-900">
+        <h3 className="text-lg font-medium text-gray-900 flex items-center">
+          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg>
           Today's Intakes
         </h3>
         {getTodaysIntakes().length === 0 ? (
@@ -195,15 +211,16 @@ export default function MedicationTracker() {
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900">{medication.name}</h3>
                   <div className="mt-1 space-y-1 text-sm text-gray-600">
-                    <p><strong>Dosage:</strong> {medication.dosage}</p>
-                    <p><strong>Taken at:</strong> {formatToEST(medication.takenAt)}</p>
+                    <p className="flex items-center"><svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg><strong className="mr-2">Dosage:</strong> {medication.dosage}</p>
+                    <p className="flex items-center"><svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" /></svg><strong className="mr-2">Taken at:</strong> {formatToEST(medication.takenAt)}</p>
                   </div>
                 </div>
                 <button
                   onClick={() => handleDelete(medication._id)}
-                  className="ml-4 text-red-600 hover:text-red-800 text-sm"
+                  className="ml-4 text-red-600 hover:text-red-800 text-sm flex items-center"
                   disabled={loading}
                 >
+                  <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0010 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" /></svg>
                   Delete
                 </button>
               </div>
@@ -213,7 +230,8 @@ export default function MedicationTracker() {
       </div>
 
       <div className="space-y-3">
-        <h3 className="text-lg font-medium text-gray-900">
+        <h3 className="text-lg font-medium text-gray-900 flex items-center">
+          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" /></svg>
           Recent Intakes
         </h3>
         {getRecentIntakes().length === 0 ? (
@@ -227,15 +245,16 @@ export default function MedicationTracker() {
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900">{medication.name}</h3>
                   <div className="mt-1 space-y-1 text-sm text-gray-600">
-                    <p><strong>Dosage:</strong> {medication.dosage}</p>
-                    <p><strong>Taken at:</strong> {formatToEST(medication.takenAt)}</p>
+                    <p className="flex items-center"><svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg><strong className="mr-2">Dosage:</strong> {medication.dosage}</p>
+                    <p className="flex items-center"><svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" /></svg><strong className="mr-2">Taken at:</strong> {formatToEST(medication.takenAt)}</p>
                   </div>
                 </div>
                 <button
                   onClick={() => handleDelete(medication._id)}
-                  className="ml-4 text-red-600 hover:text-red-800 text-sm"
+                  className="ml-4 text-red-600 hover:text-red-800 text-sm flex items-center"
                   disabled={loading}
                 >
+                  <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0010 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" /></svg>
                   Delete
                 </button>
               </div>
